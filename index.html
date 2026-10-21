@@ -1,735 +1,369 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="John Cel Rio's video editing portfolio">
-  <title>JCR. EDITS | Video Editor</title>
-
-  
-  <style>
-    :root {
-      --bg: #0b0b0d;
-      --panel: #151519;
-      --text: #f4f2ee;
-      --muted: #a5a3ac;
-      --accent: #c8ff4d;
-      --line: rgba(255,255,255,.12);
-      --max: 1160px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      width: min(var(--max), calc(100% - 40px));
-      margin: auto;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 22px 0;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .logo {
-      font-size: 1.2rem;
-      font-weight: 900;
-      letter-spacing: -1px;
-    }
-
-    .logo span,
-    .accent {
-      color: var(--accent);
-    }
-
-    nav {
-      display: flex;
-      gap: 25px;
-    }
-
-    nav a {
-      color: var(--muted);
-      font-size: .9rem;
-    }
-
-    nav a:hover {
-      color: var(--accent);
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      align-items: center;
-      gap: 45px;
-      padding-top: 90px;
-      padding-bottom: 85px;
-    }
-
-    .availability {
-      display: inline-block;
-      padding: 8px 13px;
-      border: 1px solid var(--line);
-      border-radius: 30px;
-      color: var(--muted);
-      font-size: .8rem;
-    }
-
-    .availability span {
-      color: var(--accent);
-    }
-
-    h1 {
-      font-size: clamp(3.2rem, 7vw, 6.4rem);
-      line-height: .98;
-      letter-spacing: -5px;
-      margin: 25px 0;
-    }
-
-    .hero p {
-      color: var(--muted);
-      max-width: 550px;
-      font-size: 1.05rem;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 30px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 12px 19px;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      font-weight: bold;
-      transition: .2s;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #111;
-      border-color: var(--accent);
-    }
-
-    .btn:hover {
-      transform: translateY(-3px);
-    }
-
-    .hero-art {
-      min-height: 370px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background:
-        radial-gradient(ellipse at 70% 25%, #59663a, transparent 35%),
-        radial-gradient(ellipse at 20% 80%, #38334d, transparent 40%),
-        linear-gradient(135deg, #292930, #101013);
-      display: flex;
-      align-items: flex-end;
-      padding: 25px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-art::before {
-      content: "";
-      position: absolute;
-      inset: 12%;
-      border: 1px solid rgba(255,255,255,.25);
-      border-radius: 12px;
-      transform: rotate(-7deg);
-    }
-
-    .play {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 75px;
-      height: 75px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: var(--accent);
-      color: #111;
-      font-size: 1.5rem;
-    }
-
-    .hero-label {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-label small {
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 3px;
-    }
-
-    .hero-label h2 {
-      font-size: 1.6rem;
-    }
-
-    section {
-      padding: 75px 0;
-    }
-
-    .eyebrow {
-      color: var(--accent);
-      font-size: .8rem;
-      font-weight: bold;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-    }
-
-    .section-title {
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      letter-spacing: -2px;
-      line-height: 1.1;
-      margin: 10px 0 25px;
-    }
-
-    .section-description {
-      color: var(--muted);
-      max-width: 550px;
-      margin-bottom: 25px;
-    }
-
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin-bottom: 25px;
-    }
-
-    .filter {
-      padding: 9px 15px;
-      border: 1px solid var(--line);
-      border-radius: 25px;
-      background: transparent;
-      color: var(--muted);
-      cursor: pointer;
-    }
-
-    .filter.active,
-    .filter:hover {
-      background: var(--accent);
-      color: #111;
-      border-color: var(--accent);
-    }
-
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-
-    .project {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      overflow: hidden;
-      transition: .25s;
-    }
-
-    .project:hover {
-      transform: translateY(-4px);
-      border-color: var(--accent);
-    }
-
-    .thumbnail {
-      aspect-ratio: 16 / 9;
-      min-height: 220px;
-      display: grid;
-      place-items: center;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, #303342, #15151a);
-    }
-
-    .thumbnail.green {
-      background: linear-gradient(135deg, #38462c, #141614);
-    }
-
-    .thumbnail.red {
-      background: linear-gradient(135deg, #542d2b, #191214);
-    }
-
-    .thumbnail.blue {
-      background: linear-gradient(135deg, #263f4d, #11161c);
-    }
-
-    .thumbnail::before {
-      content: "";
-      position: absolute;
-      width: 65%;
-      height: 150%;
-      left: -15%;
-      top: -25%;
-      background: rgba(200,255,77,.12);
-      transform: rotate(30deg);
-    }
-
-    .thumbnail-text {
-      z-index: 1;
-      text-align: center;
-    }
-
-    .thumbnail-text small {
-      display: block;
-      color: var(--accent);
-      letter-spacing: 4px;
-      text-transform: uppercase;
-    }
-
-    .thumbnail-text strong {
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      letter-spacing: -2px;
-      text-transform: uppercase;
-    }
-
-    .play-small {
-      position: absolute;
-      right: 17px;
-      bottom: 17px;
-      z-index: 2;
-      background: var(--accent);
-      color: #111;
-      width: 40px;
-      height: 40px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-    }
-
-    .project-info {
-      padding: 20px;
-    }
-
-    .project-meta {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      color: var(--muted);
-      font-size: .75rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .project-info h3 {
-      margin: 10px 0 5px;
-      font-size: 1.3rem;
-    }
-
-    .project-info p {
-      color: var(--muted);
-      font-size: .92rem;
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: .8fr 1.2fr;
-      gap: 60px;
-    }
-
-    .about-copy {
-      color: var(--muted);
-      margin-bottom: 17px;
-      font-size: 1.03rem;
-    }
-
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 25px;
-    }
-
-    .skills span {
-      padding: 9px 12px;
-      border: 1px solid var(--line);
-      border-radius: 5px;
-      background: var(--panel);
-      font-size: .85rem;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      margin-top: 35px;
-    }
-
-    .stat {
-      padding: 15px;
-      border-top: 1px solid var(--accent);
-      background: var(--panel);
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 1.5rem;
-    }
-
-    .stat span {
-      color: var(--muted);
-      font-size: .8rem;
-    }
-
-    .contact-panel {
-      background: var(--accent);
-      color: #111;
-      padding: clamp(30px, 6vw, 65px);
-      border-radius: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 30px;
-    }
-
-    .contact-panel .eyebrow {
-      color: #354019;
-    }
-
-    .contact-panel h2 {
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      letter-spacing: -4px;
-      line-height: 1;
-      margin: 15px 0;
-    }
-
-    .contact-panel p {
-      max-width: 520px;
-    }
-
-    .contact-panel .btn {
-      background: #111;
-      color: var(--accent);
-      border-color: #111;
-      white-space: nowrap;
-    }
-
-    footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-      padding: 28px 0;
-      color: var(--muted);
-      font-size: .85rem;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    @media (max-width: 780px) {
-      .hero,
-      .about-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        padding-top: 60px;
-      }
-
-      .hero-art {
-        min-height: 300px;
-      }
-
-      .contact-panel {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-
-    @media (max-width: 540px) {
-      .projects {
-        grid-template-columns: 1fr;
-      }
-
-      h1 {
-        letter-spacing: -3px;
-      }
-
-      nav {
-        gap: 12px;
-      }
-
-      .stats {
-        grid-template-columns: 1fr;
-      }
-
-      footer {
-        flex-direction: column;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>John Cel Rio — Video Editor</title>
+<meta name="description" content="Video editing portfolio of John Cel Rio — short-form, YouTube, commercials and color grading.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff;
+    --soft:#f6f6f4;
+    --line:#e7e7e3;
+    --ink:#111111;
+    --muted:#6b6b6b;
+    --accent:#e5322d;
+    --radius:14px;
+    --max:1160px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  section{padding:96px 0;scroll-margin-top:70px}
+  .eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  h2{font-size:clamp(1.9rem,4vw,2.8rem);line-height:1.1;letter-spacing:-.02em;font-weight:800;margin-bottom:16px}
+  .lead{color:var(--muted);max-width:560px;font-size:1.05rem}
+
+  /* NAV */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{font-weight:800;letter-spacing:-.02em;font-size:1.1rem;display:flex;align-items:center;gap:8px}
+  .rec{width:10px;height:10px;border-radius:50%;background:var(--accent);animation:blink 1.6s infinite}
+  @keyframes blink{50%{opacity:.25}}
+  .links{display:flex;gap:30px;font-size:.93rem;font-weight:500}
+  .links a{color:var(--muted);transition:color .2s}
+  .links a:hover{color:var(--ink)}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;font-weight:600;font-size:.93rem;transition:transform .2s,background .2s,color .2s;border:1.5px solid var(--ink)}
+  .btn-dark{background:var(--ink);color:#fff}
+  .btn-dark:hover{background:var(--accent);border-color:var(--accent);transform:translateY(-2px)}
+  .btn-line:hover{background:var(--ink);color:#fff;transform:translateY(-2px)}
+  .menu{display:none;background:none;border:0;font-size:1.5rem;cursor:pointer}
+
+  /* HERO */
+  .hero{padding:110px 0 80px}
+  .hero h1{font-size:clamp(2.6rem,7.5vw,5.6rem);line-height:1;letter-spacing:-.04em;font-weight:800;max-width:900px}
+  .hero h1 span{color:var(--accent)}
+  .hero p{margin:26px 0 36px;max-width:540px;color:var(--muted);font-size:1.12rem}
+  .hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+  .reel{margin-top:70px;position:relative;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;background:linear-gradient(135deg,#1b1b1b,#3a3a3a);cursor:pointer}
+  .reel::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 79px,rgba(255,255,255,.04) 79px 80px)}
+  .reel .label{position:absolute;left:24px;bottom:22px;color:#fff;z-index:2}
+  .reel .label b{display:block;font-size:1.3rem}
+  .reel .label small{opacity:.7}
+  .play{position:absolute;inset:0;margin:auto;width:84px;height:84px;border-radius:50%;background:#fff;display:grid;place-items:center;z-index:2;transition:transform .25s}
+  .play::before{content:"";border-left:22px solid var(--ink);border-top:13px solid transparent;border-bottom:13px solid transparent;margin-left:6px}
+  .reel:hover .play,.card:hover .play{transform:scale(1.08)}
+  .timecode{position:absolute;top:20px;right:22px;color:#fff;font-family:ui-monospace,Menlo,monospace;font-size:.85rem;opacity:.8;z-index:2}
+
+  /* WORK */
+  .work-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:36px}
+  .filters{display:flex;gap:8px;flex-wrap:wrap}
+  .filters button{border:1.5px solid var(--line);background:#fff;padding:8px 16px;border-radius:999px;font:500 .88rem Inter,sans-serif;cursor:pointer;transition:.2s}
+  .filters button.active,.filters button:hover{border-color:var(--ink);background:var(--ink);color:#fff}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{cursor:pointer}
+  .thumb{position:relative;aspect-ratio:16/10;border-radius:var(--radius);overflow:hidden;margin-bottom:14px}
+  .thumb.v{aspect-ratio:4/5}
+  .thumb .play{width:58px;height:58px;opacity:0;transition:opacity .25s,transform .25s}
+  .thumb .play::before{border-left-width:16px;border-top-width:10px;border-bottom-width:10px;margin-left:4px}
+  .card:hover .thumb .play{opacity:1}
+  .dur{position:absolute;right:12px;bottom:12px;background:rgba(0,0,0,.7);color:#fff;font:500 .75rem ui-monospace,monospace;padding:3px 8px;border-radius:6px}
+  .card h3{font-size:1.05rem;font-weight:700}
+  .card p{color:var(--muted);font-size:.9rem}
+  .card.hide{display:none}
+  .g1{background:linear-gradient(135deg,#ff6a4d,#e5322d)}
+  .g2{background:linear-gradient(135deg,#222,#555)}
+  .g3{background:linear-gradient(135deg,#f4c04e,#e08a1e)}
+  .g4{background:linear-gradient(135deg,#3b82f6,#1e3a8a)}
+  .g5{background:linear-gradient(135deg,#10b981,#065f46)}
+  .g6{background:linear-gradient(135deg,#a78bfa,#5b21b6)}
+
+  /* SERVICES */
+  .soft{background:var(--soft)}
+  .services{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:44px}
+  .svc{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px;transition:transform .25s,box-shadow .25s}
+  .svc:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(0,0,0,.06)}
+  .svc .num{font:600 .8rem ui-monospace,monospace;color:var(--accent)}
+  .svc h3{margin:14px 0 8px;font-size:1.1rem}
+  .svc p{color:var(--muted);font-size:.92rem}
+
+  /* PROCESS + TOOLS */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+  .steps{list-style:none;margin-top:30px;border-top:1px solid var(--line)}
+  .steps li{display:flex;gap:20px;padding:20px 0;border-bottom:1px solid var(--line)}
+  .steps b{font:600 .85rem ui-monospace,monospace;color:var(--accent);min-width:30px;padding-top:3px}
+  .steps h4{font-size:1rem}
+  .steps p{color:var(--muted);font-size:.92rem}
+  .tools{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+  .tools span{border:1.5px solid var(--line);border-radius:999px;padding:9px 16px;font-size:.9rem;font-weight:500}
+  .about-box{margin-top:34px;padding:28px;border:1px solid var(--line);border-radius:var(--radius)}
+  .about-box p{color:var(--muted);margin-bottom:10px}
+
+  /* CONTACT */
+  .contact{text-align:center}
+  .contact h2{font-size:clamp(2.4rem,6vw,4.4rem);letter-spacing:-.035em}
+  .contact .lead{margin:0 auto 34px}
+  .mail{display:inline-block;font-size:clamp(1.2rem,3vw,1.8rem);font-weight:700;border-bottom:3px solid var(--accent);padding-bottom:4px;margin-bottom:34px;word-break:break-all}
+  .mail:hover{color:var(--accent)}
+  .socials{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+  footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:.85rem}
+  footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+  /* MODAL */
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+  .modal.open{display:flex}
+  .modal-inner{width:min(1000px,100%);aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;position:relative}
+  .modal iframe{width:100%;height:100%;border:0}
+  .modal .ph{color:#fff;display:grid;place-items:center;height:100%;text-align:center;padding:20px;opacity:.8}
+  .close{position:absolute;top:18px;right:22px;background:none;border:0;color:#fff;font-size:2rem;cursor:pointer}
+
+  /* REVEAL */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:960px){
+    .grid{grid-template-columns:repeat(2,1fr)}
+    .services{grid-template-columns:repeat(2,1fr)}
+    .two{grid-template-columns:1fr;gap:40px}
+  }
+  @media (max-width:640px){
+    .wrap{padding:0 16px}
+    section{padding:72px 0}
+    .links{display:none;position:absolute;top:68px;left:0;right:0;background:#fff;flex-direction:column;gap:0;border-bottom:1px solid var(--line)}
+    .links.open{display:flex}
+    .links a{padding:16px;border-top:1px solid var(--line)}
+    .menu{display:block}
+    nav .btn{display:none}
+    .grid,.services{grid-template-columns:1fr}
+    .hero{padding:70px 0 50px}
+  }
+</style>
 </head>
-
 <body>
-  <header class="container">
-    <a href="#home" class="logo">JCR<span>.</span> EDITS</a>
 
-    <nav>
+<header>
+  <nav class="wrap">
+    <a href="#top" class="logo"><span class="rec"></span>JOHN CEL RIO</a>
+    <div class="links" id="links">
       <a href="#work">Work</a>
+      <a href="#services">Services</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
-    </nav>
-  </header>
+    </div>
+    <a href="#contact" class="btn btn-dark">Hire me</a>
+    <button class="menu" id="menu" aria-label="Menu">☰</button>
+  </nav>
+</header>
 
-  <main>
-    <section class="container hero" id="home">
-      <div>
-        <div class="availability">
-          <span>●</span> Video Editor · Available for projects
-        </div>
+<main id="top">
 
-        <h1>Stories that <span class="accent">move.</span><br>
-          Edits that stay.</h1>
-
-        <p>
-          I turn raw footage into engaging visual stories —
-          from cinematic edits and social media reels to event
-          highlights and content built to capture attention.
-        </p>
-
-        <div class="buttons">
-          <a href="#work" class="btn btn-primary">Explore my work ↘</a>
-          <a href="#contact" class="btn">Let's work together</a>
-        </div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Video Editor · Available for projects</div>
+      <h1>I cut stories that <span>keep people watching.</span></h1>
+      <p>Short-form, YouTube, brand ads and color grading. Fast turnaround, clean pacing, and edits built around retention.</p>
+      <div class="ctas">
+        <a href="#work" class="btn btn-dark">View my work</a>
+        <a href="#contact" class="btn btn-line">Let's talk</a>
       </div>
 
-      <div class="hero-art">
-        <div class="play">▶</div>
-        <div class="hero-label">
-          <small>Selected visual work</small>
-          <h2>Cut with purpose.</h2>
-        </div>
+      <!-- Replace data-video with your showreel's YouTube ID -->
+      <div class="reel reveal" data-video="" data-title="Showreel">
+        <span class="timecode">00:00:00:00</span>
+        <div class="play"></div>
+        <div class="label"><b>Showreel</b><small>Watch the highlights</small></div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="container" id="work">
-      <div class="eyebrow">01 / Selected projects</div>
-      <h2 class="section-title">A few things I've cut.</h2>
-      <p class="section-description">
-        Explore my editing style, creative storytelling,
-        transitions, and visual direction.
-      </p>
-
-      <div class="filters">
-        <button class="filter active" data-filter="all">All work</button>
-        <button class="filter" data-filter="short-form">Short-form</button>
-        <button class="filter" data-filter="cinematic">Cinematic</button>
-        <button class="filter" data-filter="events">Events</button>
-      </div>
-
-      <div class="projects">
-        <article class="project" data-category="cinematic">
-          <a href="#contact">
-            <div class="thumbnail">
-              <div class="thumbnail-text">
-                <small>Project 01</small>
-                <strong>After Hours</strong>
-              </div>
-              <div class="play-small">▶</div>
-            </div>
-            <div class="project-info">
-              <div class="project-meta">
-                <span>Cinematic edit</span>
-                <span>01 / 04</span>
-              </div>
-              <h3>After Hours — Visual Film</h3>
-              <p>Atmospheric pacing, color mood, and music-driven storytelling.</p>
-            </div>
-          </a>
-        </article>
-
-        <article class="project" data-category="short-form">
-          <a href="#contact">
-            <div class="thumbnail green">
-              <div class="thumbnail-text">
-                <small>Project 02</small>
-                <strong>Quick Cut</strong>
-              </div>
-              <div class="play-small">▶</div>
-            </div>
-            <div class="project-info">
-              <div class="project-meta">
-                <span>Short-form content</span>
-                <span>02 / 04</span>
-              </div>
-              <h3>Quick Cut — Social Reel</h3>
-              <p>Fast hooks, captions, and punchy edits for vertical video.</p>
-            </div>
-          </a>
-        </article>
-
-        <article class="project" data-category="events">
-          <a href="#contact">
-            <div class="thumbnail red">
-              <div class="thumbnail-text">
-                <small>Project 03</small>
-                <strong>The Moment</strong>
-              </div>
-              <div class="play-small">▶</div>
-            </div>
-            <div class="project-info">
-              <div class="project-meta">
-                <span>Event highlights</span>
-                <span>03 / 04</span>
-              </div>
-              <h3>The Moment — Event Recap</h3>
-              <p>Capturing the energy, people, and moments that matter.</p>
-            </div>
-          </a>
-        </article>
-
-        <article class="project" data-category="short-form">
-          <a href="#contact">
-            <div class="thumbnail blue">
-              <div class="thumbnail-text">
-                <small>Project 04</small>
-                <strong>In Focus</strong>
-              </div>
-              <div class="play-small">▶</div>
-            </div>
-            <div class="project-info">
-              <div class="project-meta">
-                <span>Creator content</span>
-                <span>04 / 04</span>
-              </div>
-              <h3>In Focus — Creator Edit</h3>
-              <p>Talking-head content with rhythm, clarity, and personality.</p>
-            </div>
-          </a>
-        </article>
-      </div>
-    </section>
-
-    <section class="container" id="about">
-      <div class="about-grid">
+  <!-- WORK -->
+  <section id="work">
+    <div class="wrap">
+      <div class="work-head">
         <div>
-          <div class="eyebrow">02 / About me</div>
-          <h2 class="section-title">The editor behind the timeline.</h2>
+          <div class="eyebrow">Selected work</div>
+          <h2>Recent projects</h2>
         </div>
-
-        <div>
-          <p class="about-copy">
-            Hey, I'm <strong style="color:var(--text)">John Cel Rio</strong>
-            — a video editor who enjoys shaping raw clips into clear,
-            engaging stories. I focus on timing, music, transitions,
-            color, and the small details that make an edit feel intentional.
-          </p>
-
-          <p class="about-copy">
-            Whether it's a short social video, a cinematic montage,
-            or an event recap, my goal is simple: make every second count.
-          </p>
-
-          <div class="skills">
-            <span>Video Editing</span>
-            <span>Storytelling</span>
-            <span>Color Grading</span>
-            <span>Sound Design</span>
-            <span>Motion & Transitions</span>
-            <span>Short-form Reels</span>
-            <span>Event Highlights</span>
-          </div>
-
-          <div class="stats">
-            <div class="stat">
-              <strong>01</strong>
-              <span>Story-first mindset</span>
-            </div>
-            <div class="stat">
-              <strong>100%</strong>
-              <span>Attention to detail</span>
-            </div>
-            <div class="stat">
-              <strong>∞</strong>
-              <span>Ideas to explore</span>
-            </div>
-          </div>
+        <div class="filters" id="filters">
+          <button class="active" data-f="all">All</button>
+          <button data-f="short">Short-form</button>
+          <button data-f="youtube">YouTube</button>
+          <button data-f="ads">Ads</button>
+          <button data-f="color">Color</button>
         </div>
       </div>
-    </section>
 
-    <section class="container" id="contact">
-      <div class="contact-panel">
-        <div>
-          <div class="eyebrow">03 / Let's create</div>
-          <h2>Have footage?<br>Let's make it something.</h2>
-          <p>
-            Have a project in mind? Send me a message and tell me
-            what you're looking to create.
-          </p>
+      <!-- For each card: set data-video to a YouTube video ID (e.g. dQw4w9WgXcQ) -->
+      <div class="grid">
+        <div class="card reveal" data-cat="short" data-video="" data-title="Reels Edit">
+          <div class="thumb g1"><div class="play"></div><span class="dur">0:30</span></div>
+          <h3>Instagram Reels Series</h3>
+          <p>Short-form · Captions, sound design</p>
         </div>
-
-        <!-- Replace this email address with your own -->
-        <a class="btn" href="mailto:your.email@example.com">
-          Email me ↗
-        </a>
+        <div class="card reveal" data-cat="youtube" data-video="" data-title="YouTube Edit">
+          <div class="thumb g2"><div class="play"></div><span class="dur">12:45</span></div>
+          <h3>YouTube Long-form</h3>
+          <p>YouTube · Story edit, motion graphics</p>
+        </div>
+        <div class="card reveal" data-cat="ads" data-video="" data-title="Product Ad">
+          <div class="thumb g3"><div class="play"></div><span class="dur">0:45</span></div>
+          <h3>Product Commercial</h3>
+          <p>Ads · Pacing, music sync</p>
+        </div>
+        <div class="card reveal" data-cat="color" data-video="" data-title="Color Grade">
+          <div class="thumb g4"><div class="play"></div><span class="dur">1:20</span></div>
+          <h3>Cinematic Color Grade</h3>
+          <p>Color · Before / after grade</p>
+        </div>
+        <div class="card reveal" data-cat="short" data-video="" data-title="TikTok Edit">
+          <div class="thumb g5"><div class="play"></div><span class="dur">0:15</span></div>
+          <h3>TikTok Hooks</h3>
+          <p>Short-form · Retention-first cuts</p>
+        </div>
+        <div class="card reveal" data-cat="youtube" data-video="" data-title="Vlog Edit">
+          <div class="thumb g6"><div class="play"></div><span class="dur">8:10</span></div>
+          <h3>Travel Vlog</h3>
+          <p>YouTube · B-roll, transitions</p>
+        </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
-  <footer class="container">
-    <span>© <span id="year"></span> John Cel Rio · Video Editing Portfolio</span>
-    <span>Built for stories, not just clips.</span>
-  </footer>
+  <!-- SERVICES -->
+  <section id="services" class="soft">
+    <div class="wrap">
+      <div class="eyebrow">Services</div>
+      <h2>What I can do for you</h2>
+      <p class="lead">From raw footage to a finished, export-ready video.</p>
+      <div class="services">
+        <div class="svc reveal"><span class="num">01</span><h3>Short-form</h3><p>Reels, TikTok and Shorts with strong hooks, captions and trending pacing.</p></div>
+        <div class="svc reveal"><span class="num">02</span><h3>YouTube</h3><p>Long-form story edits, B-roll, zooms and graphics that hold attention.</p></div>
+        <div class="svc reveal"><span class="num">03</span><h3>Brand &amp; Ads</h3><p>Product videos and commercials cut for conversion and clarity.</p></div>
+        <div class="svc reveal"><span class="num">04</span><h3>Color &amp; Audio</h3><p>Color correction, grading, audio clean-up and sound design.</p></div>
+      </div>
+    </div>
+  </section>
 
-  <script>
-    // Automatically update the copyright year
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
+  <!-- ABOUT / PROCESS -->
+  <section id="about">
+    <div class="wrap two">
+      <div class="reveal">
+        <div class="eyebrow">About</div>
+        <h2>Hi, I'm John Cel.</h2>
+        <p class="lead">I'm a video editor who loves turning raw clips into videos people actually finish watching. I focus on pacing, sound, and clean visuals.</p>
+        <div class="about-box">
+          <p>📍 Based in the Philippines · Working remotely worldwide</p>
+          <p>⏱ Typical turnaround: 2–5 days depending on length</p>
+        </div>
+        <div class="tools">
+          <span>Premiere Pro</span><span>After Effects</span><span>DaVinci Resolve</span>
+          <span>CapCut</span><span>Photoshop</span><span>Audition</span>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="eyebrow">Process</div>
+        <h2>How we'll work</h2>
+        <ul class="steps">
+          <li><b>01</b><div><h4>Brief</h4><p>You share footage, references and goals.</p></div></li>
+          <li><b>02</b><div><h4>First cut</h4><p>I build the story, pacing and structure.</p></div></li>
+          <li><b>03</b><div><h4>Polish</h4><p>Color, sound, captions and graphics.</p></div></li>
+          <li><b>04</b><div><h4>Revisions &amp; delivery</h4><p>Feedback rounds, then export in every format you need.</p></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-    // Filter projects by category
-    const filterButtons = document.querySelectorAll(".filter");
-    const projects = document.querySelectorAll(".project");
+  <!-- CONTACT -->
+  <section id="contact" class="contact soft">
+    <div class="wrap reveal">
+      <div class="eyebrow" style="justify-content:center">Contact</div>
+      <h2>Got footage?<br>Let's make it great.</h2>
+      <p class="lead">Tell me about your project, timeline and budget. I usually reply within 24 hours.</p>
+      <!-- Replace with your real email -->
+      <a class="mail" href="mailto:youremail@example.com">youremail@example.com</a>
+      <div class="socials">
+        <a class="btn btn-line" href="#" target="_blank" rel="noopener">YouTube</a>
+        <a class="btn btn-line" href="#" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn btn-line" href="#" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-dark" href="mailto:youremail@example.com">Send an email</a>
+      </div>
+    </div>
+  </section>
 
-    filterButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        filterButtons.forEach(item =>
-          item.classList.remove("active")
-        );
+</main>
 
-        button.classList.add("active");
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> John Cel Rio. All rights reserved.</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
 
-        const selectedCategory = button.dataset.filter;
+<!-- VIDEO MODAL -->
+<div class="modal" id="modal">
+  <button class="close" id="close" aria-label="Close">×</button>
+  <div class="modal-inner" id="player"></div>
+</div>
 
-        projects.forEach(project => {
-          const matches =
-            selectedCategory === "all" ||
-            project.dataset.category === selectedCategory;
+<script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-          project.classList.toggle("hidden", !matches);
-        });
-      });
+  // Mobile menu
+  const links = document.getElementById('links');
+  document.getElementById('menu').onclick = () => links.classList.toggle('open');
+  links.querySelectorAll('a').forEach(a => a.onclick = () => links.classList.remove('open'));
+
+  // Filters
+  const btns = document.querySelectorAll('#filters button');
+  btns.forEach(b => b.onclick = () => {
+    btns.forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    const f = b.dataset.f;
+    document.querySelectorAll('.card').forEach(c => {
+      c.classList.toggle('hide', f !== 'all' && c.dataset.cat !== f);
     });
-  </script>
+  });
+
+  // Video modal (YouTube IDs)
+  const modal = document.getElementById('modal');
+  const player = document.getElementById('player');
+  document.querySelectorAll('[data-video]').forEach(el => {
+    el.onclick = () => {
+      const id = el.dataset.video.trim();
+      if (id && /^[\w-]{6,20}$/.test(id)) {
+        player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
+      } else {
+        player.innerHTML = '<div class="ph">Add a YouTube video ID to <b>&nbsp;data-video&nbsp;</b> for "' + el.dataset.title + '"</div>';
+      }
+      modal.classList.add('open');
+    };
+  });
+  function closeModal(){ modal.classList.remove('open'); player.innerHTML=''; }
+  document.getElementById('close').onclick = closeModal;
+  modal.onclick = e => { if (e.target === modal) closeModal(); };
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // Running timecode on showreel
+  const tc = document.querySelector('.timecode'); let fr = 0;
+  setInterval(() => {
+    fr++; const f = fr % 24, s = Math.floor(fr/24)%60, m = Math.floor(fr/1440)%60;
+    const p = n => String(n).padStart(2,'0');
+    tc.textContent = '00:' + p(m) + ':' + p(s) + ':' + p(f);
+  }, 1000/24);
+
+  // Scroll reveal
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+  }), {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
 </body>
 </html>
