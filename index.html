@@ -177,8 +177,8 @@
         <a href="#contact" class="btn btn-line">Let's talk</a>
       </div>
 
-      <!-- Replace data-video with your showreel's YouTube ID -->
-      <div class="reel reveal" data-video="" data-title="Showreel">
+      <!-- TEMPORARY PLACEHOLDER: Blender Studio open-movie showreel. Replace with your own showreel's YouTube ID before sharing. -->
+      <div class="reel reveal" data-video="X4MXWcx4jUA" data-title="Showreel">
         <span class="timecode">00:00:00:00</span>
         <div class="play"></div>
         <div class="label"><b>Showreel</b><small>Watch the highlights</small></div>
@@ -203,34 +203,34 @@
         </div>
       </div>
 
-      <!-- For each card: set data-video to a YouTube video ID (e.g. dQw4w9WgXcQ) -->
+      <!-- TEMPORARY PLACEHOLDERS: Blender Studio open movies (Creative Commons), NOT my work. Replace each data-video with your own YouTube ID before sharing. -->
       <div class="grid">
-        <div class="card reveal" data-cat="short" data-video="" data-title="Reels Edit">
+        <div class="card reveal" data-cat="short" data-video="mN0zPOpADL4" data-title="Reels Edit">
           <div class="thumb g1"><div class="play"></div><span class="dur">0:30</span></div>
           <h3>Instagram Reels Series</h3>
           <p>Short-form · Captions, sound design</p>
         </div>
-        <div class="card reveal" data-cat="youtube" data-video="" data-title="YouTube Edit">
+        <div class="card reveal" data-cat="youtube" data-video="aqz-KE-bpKQ" data-title="YouTube Edit">
           <div class="thumb g2"><div class="play"></div><span class="dur">12:45</span></div>
           <h3>YouTube Long-form</h3>
           <p>YouTube · Story edit, motion graphics</p>
         </div>
-        <div class="card reveal" data-cat="ads" data-video="" data-title="Product Ad">
+        <div class="card reveal" data-cat="ads" data-video="TFbSDH6ytlk" data-title="Product Ad">
           <div class="thumb g3"><div class="play"></div><span class="dur">0:45</span></div>
           <h3>Product Commercial</h3>
           <p>Ads · Pacing, music sync</p>
         </div>
-        <div class="card reveal" data-cat="color" data-video="" data-title="Color Grade">
+        <div class="card reveal" data-cat="color" data-video="OHOpb2fS-cM" data-title="Color Grade">
           <div class="thumb g4"><div class="play"></div><span class="dur">1:20</span></div>
           <h3>Cinematic Color Grade</h3>
           <p>Color · Before / after grade</p>
         </div>
-        <div class="card reveal" data-cat="short" data-video="" data-title="TikTok Edit">
+        <div class="card reveal" data-cat="short" data-video="1kiLnmov0XI" data-title="TikTok Edit">
           <div class="thumb g5"><div class="play"></div><span class="dur">0:15</span></div>
           <h3>TikTok Hooks</h3>
           <p>Short-form · Retention-first cuts</p>
         </div>
-        <div class="card reveal" data-cat="youtube" data-video="" data-title="Vlog Edit">
+        <div class="card reveal" data-cat="youtube" data-video="unzyMR9NG9s" data-title="Vlog Edit">
           <div class="thumb g6"><div class="play"></div><span class="dur">8:10</span></div>
           <h3>Travel Vlog</h3>
           <p>YouTube · B-roll, transitions</p>
@@ -336,6 +336,12 @@
     document.querySelectorAll('.card').forEach(c => {
       c.classList.toggle('hide', f !== 'all' && c.dataset.cat !== f);
     });
+  });
+
+  // Card thumbnails from YouTube (when data-video is set)
+  document.querySelectorAll('.card[data-video]').forEach(c => {
+    const id = c.dataset.video.trim(), t = c.querySelector('.thumb');
+    if (id && t) t.style.background = 'center/cover no-repeat url(https://i.ytimg.com/vi/' + id + '/hqdefault.jpg)';
   });
 
   // Video modal (YouTube IDs)
